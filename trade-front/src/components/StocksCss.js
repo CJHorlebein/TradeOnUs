@@ -1,3 +1,4 @@
 export let box = {
-    color: 'black'
+    backgroundColor: 'black',
+    height: '200vh'
 }

@@ -6,9 +6,10 @@ import { Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Stocks from './components/Stocks'
 import Account from './components/Account'
-import Game from './components/Game'
-import Footer from './components/Footer'
+import Funds from './components/Funds'
+import Login from './components/Login'
 import Home from './components/Home'
+import Footer from './components/Footer'
 
 class App extends Component {
   componentDidMount(){
@@ -23,7 +24,8 @@ class App extends Component {
         <Switch>
           <Route path="/stocks" component={Stocks} />
           <Route path="/account" component={Account} />
-          <Route path="/game" component={Game} />
+          <Route path="/funds" component={Funds} />
+          <Route path="/login" component={Login} />
           <Route path="/" component={Home} />
         </Switch>
         <Footer />

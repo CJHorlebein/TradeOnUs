@@ -1,5 +1,5 @@
 import React from 'react';
-import * as css from './GameCss'
+import * as css from './FundsCss'
 
 
 let Game = () => (

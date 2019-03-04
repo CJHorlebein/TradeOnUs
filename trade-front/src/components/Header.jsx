@@ -7,13 +7,14 @@ let Header = () => (
     <div>
         <div style = {css.box}>
             <div style = {css.navLeft}>
-                <NavLink style={css.link} to="/">TradeOn</NavLink>
-                <NavLink style={css.link} to="/stocks">Stocks</NavLink>
-                <NavLink style={css.link} to="/account">Account</NavLink>
-                <NavLink style={css.link} to="/game">Game</NavLink>
+                <img style={css.logo} src={require('./img/bulb.svg')} alt="TradeOn logo"/>
+                <NavLink style={css.leftLink} to="/">TradeOn</NavLink>
+                <NavLink style={css.leftLink} to="/stocks">Stocks</NavLink>
+                <NavLink style={css.leftLink} to="/account">Account</NavLink>
+                <NavLink style={css.leftLink} to="/funds">Funds</NavLink>
             </div>
             <div>
-                <NavLink style={css.link} to="/login">Login</NavLink>
+                <NavLink style={css.button} to="/login">Login</NavLink>
             </div>
         </div>
         <div style = {css.space}></div>

@@ -1,13 +1,20 @@
 export let box = {
     backgroundColor: '#204662',
-    padding: '2vh 6rem'
+    marginTop: '12vh',
+    padding: '2vh 5rem'
 };
 
 export let info = {
     display: 'flex',
     width: '40vw',
-    marginBottom: '5vh',
+    marginBottom: '2vh',
     justifyContent: 'space-between'
+};
+
+export let text = {
+    color: '#FFEE7D',
+    textDecoration: 'none',
+    marginBottom: '.5em'
 };
 
 export let item = {
