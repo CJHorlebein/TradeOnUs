@@ -18,11 +18,12 @@ class Login extends Component{
         })
     }
     render(){
+        let sizeStyle = window.innerWidth > 1200 ? css.container : css.nothing
         return (
             <div style={css.box}>
                 <div style={css.mainContainer}>
                     <LoginLogo />
-                    <div style={css.container}>
+                    <div style={sizeStyle}>
                         <div style={css.buttons}>
                             <button style={this.state.login ? css.signTrue : css.signBtn} onClick={() => this.changeForm(true)}>Sign In</button>
                             <button style={!this.state.login ? css.regisTrue : css.regisBtn} onClick={() => this.changeForm(false)}>Register</button>

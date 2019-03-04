@@ -5,13 +5,14 @@ export let box = {
 export let mainContainer = {
     display: 'flex',
     justifyContent: 'center',
-    padding: '0 8em'
 }
 
 export let container = {
     width: '50%'
 }
-
+export let nothing = {
+    
+}
 export let buttons = {
     textAlign: 'center'
 }

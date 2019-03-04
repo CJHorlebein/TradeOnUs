@@ -1,28 +1,21 @@
 import React from 'react';
-// import * as css from './LoginCss'
+import * as css from './RegisterFormCss'
 
-
-// export let header = {
-//     fontSize: '4rem',
-//     color: '#15232D'
-// }
-
-
-// export let subHeader = {
-//     fontSize: '2rem',
-//     color: '#444F57'
-// }
 
 let RegisterForm = () => (
-    <div>
-        <h1>Welcome to TradeOn</h1>
-        <h1>Register today!</h1>
-        <h3>Make your money work for you!</h3>
-        <div>Name</div>
-        <div>Name</div>
-        <div>email</div>
-        <div>password</div>
-        <div>password</div>
+    <div style={css.box}>
+        <h1 style={css.header}><span>Register today!</span></h1>
+        <h3 style={css.subHeader}><span>Make your money work for you!</span></h3>
+        <form style={css.formField}>
+            <div style={css.nameFields}>
+                <input style={css.nameField} type='text' name='fname' placeholder='First Name' />
+                <input style={css.nameField} type='text' name='lname' placeholder='Last Name' />
+            </div>
+            <input style={css.field} type='text' name='email' placeholder='Email' />
+            <input style={css.field} type='password' name='password' placeholder='Password' />
+            <input style={css.field} type='password' name='password2' placeholder='Confirm Password' />
+            <button style={css.button} type='submit'>Submit</button>
+        </form>
     </div>
 )
 

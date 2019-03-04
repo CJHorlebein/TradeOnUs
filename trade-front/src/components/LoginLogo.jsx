@@ -2,7 +2,8 @@ import React from 'react';
 
 let container = {
     width: '50%',
-    textAlign: 'center'
+    textAlign: 'center',
+    margin: '3em auto 10em'
 }
 
 let LoginLogo = () => {
