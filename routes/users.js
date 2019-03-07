@@ -63,13 +63,6 @@ router.post('/register', (req, res) => {
                                         password: undefined,
                                         _id: undefined,
                                         date: undefined
-                                        // email: user.email,
-                                        // fname: user.fname,
-                                        // lname: user.lname,
-                                        // funds: user.funds,
-                                        // history: user.history,
-                                        // watchlist: user.watchlist,
-                                        // stocks: user.stocks
                                     })
                                 })
                                 .catch(err => console.log(err));
@@ -81,13 +74,17 @@ router.post('/register', (req, res) => {
 });
 
 // Login Handle
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/dashboard',
-        failureRedirect: '/users/login'
-    })(req, res, next);
-});
-
+router.post('/login',
+    passport.authenticate('local'), 
+    (req, res) => {
+        res.send({
+        ...req.user._doc,
+        password: undefined,
+        _id: undefined,
+        date: undefined
+        })
+    }
+)
 
 // Logout Handle
 router.get('/logout', (req, res, next) => {
