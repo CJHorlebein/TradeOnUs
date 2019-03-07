@@ -8,7 +8,7 @@ class Login extends Component{
     constructor(props){
         super(props);
         let initialState = {
-            login: true
+            login: false
         };
         this.state = initialState;
     }

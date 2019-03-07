@@ -4,17 +4,17 @@ import { Switch, Route } from 'react-router-dom'
 
 // Routes
 import Header from './components/Header'
-import Stocks from './components/Stocks'
-import Account from './components/Account'
-import Funds from './components/Funds'
-import Login from './components/Login'
+import Stocks from './components/Stocks/Stocks'
+import Account from './components/Account/Account'
+import Market from './components/Market/Market'
+import Login from './components/Login/Login'
 import Home from './components/Home'
 import Footer from './components/Footer'
 
 class App extends Component {
   componentDidMount(){
     axios.get('/api/').then(response =>{
-      console.log(response);
+      // console.log(response);
     })
   }
   render() {
@@ -22,9 +22,9 @@ class App extends Component {
       <div>
         <Header />
         <Switch>
-          <Route path="/stocks" component={Stocks} />
+          <Route path="/market" component={Market} />
           <Route path="/account" component={Account} />
-          <Route path="/funds" component={Funds} />
+          <Route path="/stock" component={Stocks} />
           <Route path="/login" component={Login} />
           <Route path="/" component={Home} />
         </Switch>

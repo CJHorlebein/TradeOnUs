@@ -3,10 +3,10 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-    const { type } = action;
-    if(type){
+    const { type, payload } = action;
+    if(type === 'ADD_USER'){
         return{
-            ...state
+            user: payload
         }
     } else {
         return state;

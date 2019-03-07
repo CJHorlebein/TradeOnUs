@@ -3,6 +3,9 @@ const router = express.Router();
 const { authUser } = require('../config/auth')
 
 // Portfolio Page
+router.get('/', (req, res) => res.send('Portfolio Page'))
+
+// Portfolio Page
 router.get('/portfolio', authUser, (req, res) => res.send('Portfolio Page'))
 
 // Account Page

@@ -14,28 +14,22 @@ router.get('/register', (req, res) => res.send('register'));
 
 // Register Handle
 router.post('/register', (req, res) => {
-    const {name, email, password, password2 } = req.body;
+    const {fname, lname, email, password, password2 } = req.body;
     let errors = [];
 
     // Check fields
-    if (!(name && email && password && password2)){
+    if (!(fname  && lname && email && password && password2)){
         errors.push({msg: 'Please fill in all fields'});
     }
     if (password !== password2){
         errors.push({msg: 'Passwords do not match'});
     }
-    if (password.length < 6){
+    if (password === undefined || password.length < 6){
         errors.push({msg: 'Password should be at least 6 characters'});
     }
-
+    
     if(errors.length > 0){
-        res.render('register',{
-            errors,
-            name,
-            email,
-            password,
-            password2
-        });
+        res.status(422).send(errors);
     } else{
         // Validation Passed
         User.findOne({ email: email})
@@ -43,32 +37,40 @@ router.post('/register', (req, res) => {
                 if(user) {
                     // User exists
                     errors.push({msg: 'Email already registered'});
-                    res.render('register', {
-                        errors,
-                        name,
-                        email,
-                        password,
-                        password2
-                    });
+                    res.status(401).send(errors)
                 } else {
                     const newUser = new User({
-                        name,
+                        fname,
+                        lname,
                         email,
-                        password
+                        password,
+                        funds: 10000,
+                        history: [],
+                        watchlist: [],
+                        stocks: []
                     });
-
                     // Hash Password
                     bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(newUser.password, salt, (err, hash) => {
                             if(err) throw err;
-
                             // Set password to Hashed
                             newUser.password = hash;
-
                             // Save user
                             newUser.save()
                                 .then(user => {
-                                    res.redirect('/users/login');
+                                    res.status(200).json({
+                                        ...user._doc,
+                                        password: undefined,
+                                        _id: undefined,
+                                        date: undefined
+                                        // email: user.email,
+                                        // fname: user.fname,
+                                        // lname: user.lname,
+                                        // funds: user.funds,
+                                        // history: user.history,
+                                        // watchlist: user.watchlist,
+                                        // stocks: user.stocks
+                                    })
                                 })
                                 .catch(err => console.log(err));
                         });

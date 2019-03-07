@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3001;
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
 // Passport config
 require('./config/passport')(passport);
@@ -16,6 +17,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 // BodyParser
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 
 // Express session
 app.use(session({
