@@ -23,7 +23,6 @@ class RegisterForm extends Component {
             if(user[field] === ''){ user[field] = undefined };
         })
         axios.post('/users/register', user).then(res => {
-            console.log(res.data);
             this.setState({
                 errors: [],
                 success: true
@@ -37,8 +36,8 @@ class RegisterForm extends Component {
     render (){
         return (
             <div style={css.box}>
-                {this.state.errors.map((error, i) => <FormAlert success={this.state.success} error={error} key={i}/>)}
-                {this.state.success ? <FormAlert success={this.state.success} /> : ''}
+                {this.state.errors.map((error, i) => <FormAlert success={this.state.success} msg={error} key={i}/>)}
+                {this.state.success ? <FormAlert success={true} msg={'You have been registered, please login!'} /> : ''}
                 <h1 style={css.header}><span>Register today!</span></h1>
                 <h3 style={css.subHeader}><span>Make your money work for you!</span></h3>
                 <form onSubmit={(e) => this.submitForm(e)} style={css.formField}>

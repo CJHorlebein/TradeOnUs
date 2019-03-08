@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import * as css from './HeaderCss'
-
+import * as css from './HeaderCss';
+import LogBtn from './LogBtn';
 
 let Header = () => (
     <div>
@@ -11,16 +11,15 @@ let Header = () => (
                 <NavLink style={css.leftLink} to="/">TradeOn</NavLink>
                 <NavLink style={css.leftLink} to="/stocks">Stocks</NavLink>
                 <NavLink style={css.leftLink} to="/account">Account</NavLink>
-                <NavLink style={css.leftLink} to="/funds">Funds</NavLink>
+                <NavLink style={css.leftLink} to="/Market">Market</NavLink>
             </div>
             <div>
-                <NavLink style={css.button} to="/login">Login</NavLink>
+                <LogBtn />
             </div>
         </div>
         <div style = {css.space}></div>
     </div>
 )
-
 
 
 export default Header;

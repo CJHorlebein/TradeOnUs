@@ -1,10 +1,18 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import * as css from './LoginFormCss';
+import FormAlert from './FormAlert';
 import axios from 'axios';
 
 
 class LoginForm extends Component{
+    constructor(props){
+        super(props);
+        let initialState = {
+            msg: ''
+        }
+        this.state = initialState;
+    }
     loginUser(e){
         e.preventDefault();
         let user = {
@@ -13,13 +21,19 @@ class LoginForm extends Component{
         }
         axios.post('/users/login', user )
             .then(res => {
-                console.log(res);
+                this.props.addUser(res.data)
+                console.log('logged successful')
+                this.setState({
+                    msg: 'You are now logged in'
+                })
                 // this.props.history.push('/stocks')
             })
     }
     render(){
+        console.log(this.state);
         return (
             <div style={css.box}>
+                {this.state.msg !== '' ? <FormAlert success={true} msg={this.state.msg}/> : ''}
                 <div style={css.header}><em>Please sign in to continue...</em></div>
                 <form onSubmit={(e) => this.loginUser(e)} style={css.formField}>
                     <input style={css.field} type='text' id='email' placeholder='Email' />

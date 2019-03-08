@@ -8,6 +8,11 @@ const reducer = (state = initialState, action) => {
         return{
             user: payload
         }
+    } else if(type === 'LOGOUT'){
+        console.log('logged off')
+        return {
+            user: {}
+        }
     } else {
         return state;
     }

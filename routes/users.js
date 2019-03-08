@@ -6,12 +6,6 @@ const passport = require('passport');
 // User Model
 const User = require('../models/User');
 
-// Login Page
-router.get('/login', (req, res) => res.send('login'));
-
-// register Page
-router.get('/register', (req, res) => res.send('register'));
-
 // Register Handle
 router.post('/register', (req, res) => {
     const {fname, lname, email, password, password2 } = req.body;
@@ -89,7 +83,7 @@ router.post('/login',
 // Logout Handle
 router.get('/logout', (req, res, next) => {
     req.logout();
-    res.redirect('/users/login');
+    res.sendStatus(200);
 })
 
 module.exports = router;

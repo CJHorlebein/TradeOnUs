@@ -24,19 +24,11 @@ export let link = {
     fontSize: '1.5rem'
 };
 
-export let button = {
-    textDecoration: 'none',
-    padding: '.3em 1em',
-    borderRadius: '1.2em',
-    fontSize: '1.5rem',
-    backgroundColor: '#FFC600',
-    color: '#15232D'
-}
-
 export let leftLink = {
     ...link,
     marginRight: '.6em'
 };
+
 export let space = {
     height: '8vh'
 };
