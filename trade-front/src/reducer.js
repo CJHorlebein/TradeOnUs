@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
             user: payload
         }
     } else if(type === 'LOGOUT'){
-        console.log('logged off')
+
         return {
             user: {}
         }

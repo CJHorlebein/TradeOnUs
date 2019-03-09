@@ -22,15 +22,12 @@ class LoginForm extends Component{
         axios.post('/users/login', user )
             .then(res => {
                 this.props.addUser(res.data)
-                console.log('logged successful')
                 this.setState({
                     msg: 'You are now logged in'
                 })
-                // this.props.history.push('/stocks')
             })
     }
     render(){
-        console.log(this.state);
         return (
             <div style={css.box}>
                 {this.state.msg !== '' ? <FormAlert success={true} msg={this.state.msg}/> : ''}

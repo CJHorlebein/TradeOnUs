@@ -25,7 +25,7 @@ let UserSchema = new mongoose.Schema({
     history: {
         type: [String]
     },
-    watchlist: {
+    watch: {
         type: [String]
     },
     funds: {

@@ -12,14 +12,26 @@ let btn = {
     color: '#15232D'
 }
 
+let name = {
+    marginRight: '1em',
+    fontSize: '1.5rem',
+    color: '#ffffff'
+}
+
 class LogBtn extends Component{
+    constructor(props){
+        super(props);
+    }
     logoutUser(){
         axios.get('/users/logout').then(e => this.props.logout())
     }
     render(){
+        console.log(this.props);
+        let {fname, email } = this.props.state.user;
+        if (email === undefined) return <NavLink style={btn} to="/login">Login</NavLink>
         return (
             <div>
-                <NavLink style={btn} to="/login">Login</NavLink>
+                <span style={name}>{fname}</span>
                 <NavLink style={btn} onClick={() => this.logoutUser()} to="/login">Logout</NavLink>
             </div>
         )
@@ -28,7 +40,8 @@ class LogBtn extends Component{
 
 let mapStateToProps = (state) => {
     return {
-        user: state.user
+        logout: state.logout,
+        state
     }
 }
 
@@ -37,7 +50,6 @@ let mapDispatchToProps = (dispatch) => {
         logout: () => dispatch({ type: 'LOGOUT' })
     }
 }
-
 
 export default connect(
     mapStateToProps,

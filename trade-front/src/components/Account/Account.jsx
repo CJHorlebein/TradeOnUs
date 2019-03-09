@@ -1,16 +1,33 @@
 import React from 'react';
 import * as css from './AccountCss';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router-dom';
 
 
 let Account = (props) => {
-    console.log(props)
+    let { email, fname, lname, funds, history, watch, stocks } = props.state.user;
+
+    email = 'aaaaaa'
+    fname = 'aaaaaa'
+    lname = 'aaaaaa'
+    funds = 'aaaaaa'
+    history = []
+    watch = []
+
+
+    if (!email) { return <Redirect to='/login' /> }
     return (
         <div style={css.box}>
             <div style={css.header}>Account Info</div>
             <hr />
             <div>
-
+                <div>email: {email}</div>
+                <div>fname: {fname}</div>
+                <div>lname: {lname}</div>
+                <div>funds: {funds}</div>
+                <div>history: {history}</div>
+                <div>watchlist: {watch}</div>
+                <div>stocks: {stocks}</div>
             </div>
         </div>
     )
@@ -18,7 +35,7 @@ let Account = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        user: state.user
+        state
     }
 }
 
@@ -32,4 +49,4 @@ let mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Account);
+)(withRouter(Account));

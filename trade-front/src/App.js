@@ -7,8 +7,8 @@ import Stocks from './components/Stocks/Stocks'
 import Account from './components/Account/Account'
 import Market from './components/Market/Market'
 import Login from './components/Login/Login'
-import Home from './components/Home'
-import Footer from './components/Footer'
+import Home from './components/Home/Home'
+import Footer from './components/Footer/Footer'
 
 class App extends Component {
   render() {

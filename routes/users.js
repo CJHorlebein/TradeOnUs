@@ -40,7 +40,7 @@ router.post('/register', (req, res) => {
                         password,
                         funds: 10000,
                         history: [],
-                        watchlist: [],
+                        watch: [],
                         stocks: []
                     });
                     // Hash Password

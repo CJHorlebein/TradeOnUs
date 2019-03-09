@@ -1,16 +1,12 @@
 import React from 'react';
-import * as css from './MarketCss'
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 
-let Market = (props) => {
-    let { email, fname, lname, funds, history, watch, stocks } = props.state.user;
-    if (!email) { return <Redirect to='/login' /> }
-    return (
-        <div style={css.box}>
-            <h1>Market for {fname}</h1>
-        </div>
-    )
+let LocalAuth = (props) => {
+    if (props.state.user.email === undefined) {
+        return <Redirect to='/login' />
+    }
+    return ''
 }
 
 let mapStateToProps = (state) => {
@@ -25,8 +21,7 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(Market));
+)(withRouter(LocalAuth));
