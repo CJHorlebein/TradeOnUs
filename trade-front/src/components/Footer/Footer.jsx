@@ -33,9 +33,15 @@ let Footer = () => (
             </div>
         </div>
         <div style={css.text}> 
-            <a style={css.text} href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from 
-            <a style={css.text} href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> is licensed by 
-            <a style={css.text} href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"> CC 3.0 BY</a>
+            Data provided for free by 
+            <a style={css.text} href='https://iextrading.com/developer/' rel="noopener noreferrer" target='_blank'> IEX. </a>
+            View 
+            <a style={css.text} href='https://iextrading.com/api-exhibit-a/' rel="noopener noreferrer" target='_blank'> IEX’s Terms of Use.</a>
+        </div>
+        <div style={css.text}> 
+            <a style={css.text} href="https://www.flaticon.com/authors/smashicons" rel="noopener noreferrer" target='_blank'>Smashicons</a> from 
+            <a style={css.text} href="https://www.flaticon.com/" rel="noopener noreferrer" target='_blank'> www.flaticon.com</a> is licensed by 
+            <a style={css.text} href="http://creativecommons.org/licenses/by/3.0/" rel="noopener noreferrer" target='_blank'> CC 3.0 BY</a>
         </div>
         <div style = {css.bottom}>
             <div>

@@ -6,10 +6,14 @@ const passport = require('passport');
 // User Model
 const User = require('../models/User');
 
+let capitalize = (word) => word.slice(0,1).toUpperCase() + word.slice(1)
+
 // Register Handle
 router.post('/register', (req, res) => {
-    const {fname, lname, email, password, password2 } = req.body;
+    let {fname, lname, email, password, password2 } = req.body;
     let errors = [];
+    fname = capitalize(fname);
+    lname = capitalize(lname);
 
     // Check fields
     if (!(fname  && lname && email && password && password2)){

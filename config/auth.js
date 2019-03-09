@@ -3,6 +3,6 @@ module.exports = {
         if(req.isAuthenticated()){
             return next();
         }
-        res.redirect('/users/login');
+        res.status(400).send({msg: 'Must be logged in to trade'});
     }
 }

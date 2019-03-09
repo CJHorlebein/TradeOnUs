@@ -19,14 +19,10 @@ let name = {
 }
 
 class LogBtn extends Component{
-    constructor(props){
-        super(props);
-    }
     logoutUser(){
         axios.get('/users/logout').then(e => this.props.logout())
     }
     render(){
-        console.log(this.props);
         let {fname, email } = this.props.state.user;
         if (email === undefined) return <NavLink style={btn} to="/login">Login</NavLink>
         return (

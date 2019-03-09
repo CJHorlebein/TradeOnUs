@@ -21,7 +21,7 @@ class LoginForm extends Component{
         }
         axios.post('/users/login', user )
             .then(res => {
-                this.props.addUser(res.data)
+                this.props.updateUser(res.data)
                 this.setState({
                     msg: 'You are now logged in'
                 })
@@ -50,7 +50,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addUser: (user) => dispatch({  type: 'ADD_USER', payload: user })
+        updateUser: (user) => dispatch({  type: 'UPDATE_USER', payload: user })
     }
 }
 
