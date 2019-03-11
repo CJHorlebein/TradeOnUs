@@ -1,36 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 import * as css from './MarketCss'
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 
-let Market = (props) => {
-    // let { email, fname, lname, funds, history, watch, stocks } = props.state.user;
-    // if (email) { return <Redirect to='/login' /> }
-
-    // email = 'aaaa@aa.aa';
-    // fname = 'Aaaaaa';
-    // lname = 'Aaaaaa';
-    // funds = 10000;
-    // stocks = [
-    //     {
-    //         price: 200,
-    //         quantity: 200,
-    //         name: 'Tesla',
-    //         ticker: 'TSLA'
-    //     },
-    //     {
-    //         price: 200,
-    //         quantity: 200,
-    //         name: 'Tesla',
-    //         ticker: 'TSLA'
-    //     }
-    // ];
-
-    return (
-        <div style={css.box}>
-            <h1>Market</h1>
-        </div>
-    )
+class Market extends Component{
+    constructor(props){
+        super(props)
+        let initialState = {
+            alerts: [], // { msg: 'test message'}
+            success: false
+        }
+        this.state = initialState;
+    }
+    addMoney(){
+        axios.post('/api/money/10000')
+            .then(res => {
+                this.props.updateUser(res.data)
+                this.setState({
+                    alerts: [{ msg: "Stock Purchased Successfully" }],
+                    success: true
+                });
+            })
+            .catch(err => {
+                this.setState({
+                    alerts: [{ ...err.response.data }],
+                    success: false
+                })
+            })
+    }
+    render(){
+        let { email, fname, lname, funds, history, watch, stocks } = this.props.state.user;
+        if (!email) { return <Redirect to='/login' /> }
+        return (
+            <div style={css.box}>
+                <h1>Market</h1>
+                <button onClick={() => this.addMoney()}>MONEY</button>
+            </div>
+        )
+    }
 }
 
 let mapStateToProps = (state) => {

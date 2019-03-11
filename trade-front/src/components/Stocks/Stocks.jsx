@@ -23,11 +23,6 @@ class Stocks extends Component{
             })
         })  
     }
-    sellStock(){
-        // https://iextrading.com/developer/docs/#support
-        // https://api.iextrading.com/1.0
-
-    }
     render(){
         let { email, funds} = this.props.state.user;
         if (!email) { return <Redirect to='/login' /> }

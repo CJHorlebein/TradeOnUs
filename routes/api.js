@@ -11,9 +11,9 @@ function updateStocks(user, cost, symbol, companyName, amount){
     let stock
     if (stocks && stocks[symbol]){
         let { price, quantity } = stocks[symbol];
-        let avg = (price * quantity + 1*cost) / (1*amount + 1*quantity)
+        let avg = (price * quantity + cost) / (amount + quantity)
         stock = {
-            quantity: 1*amount + 1*quantity,
+            quantity: amount + quantity,
             price: avg.toFixed(2),
             companyName
         }
@@ -35,6 +35,7 @@ function updateStocks(user, cost, symbol, companyName, amount){
 
 }
 
+
 async function tradeStock(email, symbol, amount){
     return User.findOne({ email : email})
         .then(async(user) => {
@@ -53,7 +54,7 @@ async function tradeStock(email, symbol, amount){
             return User.updateOne({ email: email }, user)
                 .then(e => {
                     return user;
-                })
+                }).catch(err => console.log(err))
         }).catch(err => console.log(err))
 }
 
@@ -66,9 +67,8 @@ router.post('/buy/:symbol/:amount', authUser, (req, res, next) => {
     if (!amount && amount < 1) { errors.push({ msg: 'Must purchase at least 1 share' }) }
     if (errors.length > 0) { res.status(422).send(errors) }
     else{
-        tradeStock(req.user.email, symbol, amount)
+        tradeStock(req.user.email, symbol, amount * 1)
             .then(user => {
-                console.log(user);
                 res.status(200).send({
                     ...user,
                     password: undefined,
@@ -91,7 +91,7 @@ router.post('/sell/:symbol/:amount', authUser, (req, res, next) => {
         tradeStock(req.user.email, symbol, amount * -1)
             .then(user => {
                 res.status(200).send({
-                    ...user._doc,
+                    ...user,
                     password: undefined,
                     _id: undefined,
                     date: undefined
@@ -100,9 +100,29 @@ router.post('/sell/:symbol/:amount', authUser, (req, res, next) => {
     }
 });
 
-// Sell Page
-router.post('/money/:method/:amount', authUser, (req, res) => {
-    res.send(req)
+// Add money route
+router.post('/money/:sum', authUser, (req, res) => {
+    let sum = req.params.sum * 1;
+    let email = req.user.email;
+    console.log(`user funds is ${req.user.funds}`)
+    if (!sum && sum < 0) { res.status(400).send({ msg: 'Amount added must be greater than 0' }) }
+    else {
+        User.findOne({email: email})
+            .then((user) => {
+                let funds = (user.funds + sum).toFixed(2);
+                User.updateOne({ email: email }, { ...user._doc, funds})
+                    .then(e => {
+                        res.status(200).send({
+                            ...user._doc,
+                            funds,
+                            password: undefined,
+                            _id: undefined,
+                            date: undefined
+                        })
+                    }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
+    }
 });
+
 
 module.exports = router;

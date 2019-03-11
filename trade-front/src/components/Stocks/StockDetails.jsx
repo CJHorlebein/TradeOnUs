@@ -20,7 +20,6 @@ class StockDetails extends Component {
         axios.post(`/api/buy/${sym}/${num}`)
             .then(res => {
                 this.props.updateUser(res.data)
-                console.log(res)
                 this.setState({
                     alerts: [
                         { msg: "Stock Purchased Successfully"}
