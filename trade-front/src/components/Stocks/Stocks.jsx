@@ -30,22 +30,12 @@ class Stocks extends Component{
     }
     render(){
         let { email, funds} = this.props.state.user;
-        // if (email) { return <Redirect to='/login' /> }
-
-        funds = 10000;
-        let stocks = [
-            {
-                price: 200,
-                quantity: 200,
-                name: 'Tesla',
-                ticker: 'TSLA'
-            }
-        ];
+        if (!email) { return <Redirect to='/login' /> }
         return (
             <div style={css.box}>
                 <h1>Buy Stocks {funds} </h1>
                 <form onSubmit={(e) => this.searchStock(e)}>
-                    <input type='text' id='ref'/>
+                    <input type='text' id='ref' defaultValue='FB'/>
                     <button type='submit'>Search</button>
                 </form>
                 {this.state.results.map((stock, i) => <StockDetails stock={stock} key={i}/>)}
@@ -61,5 +51,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    null
 )(Stocks);

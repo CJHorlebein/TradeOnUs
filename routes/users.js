@@ -45,7 +45,7 @@ router.post('/register', (req, res) => {
                         funds: 10000,
                         history: [],
                         watch: [],
-                        stocks: []
+                        stocks: {}
                     });
                     // Hash Password
                     bcrypt.genSalt(10, (err, salt) => {

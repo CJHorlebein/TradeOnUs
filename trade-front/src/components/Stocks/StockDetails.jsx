@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FormAlert from './FormAlert'
+import { connect } from 'react-redux';
+import FormAlert from './FormAlert';
 
 class StockDetails extends Component {
     constructor(props){
@@ -21,39 +22,49 @@ class StockDetails extends Component {
         console.log('axios called')
         axios.post(`/api/buy/${sym}/${num}`)
             .then(res => {
-                console.log("hey")
+                console.log(res);
+                this.props.updateUser(res.data)
                 this.setState({
                     alerts: [
-                        { ...res.data, success: true }
-                    ]
+                        { msg: "Stock Purchased Successfully"}
+                    ],
+                    success: true
                 })
             })
             .catch(err => {
                 console.log('err')
                 this.setState({
                     alerts:[
-                        {...err.response.data, success:false}
-                    ]
+                        {...err.response.data}
+                    ],
+                    success: false
                 })
             })
     }
     render(){
-        console.log(this.props.stock);
-        console.log(this.props);
-        console.log(this.state);
         let { symbol, latestPrice, companyName } = this.props.stock
         return (
             <div>
                 {symbol}
                 {latestPrice}
                 {companyName}
-                <input type='number' id='quantity'/>
+                <input type='number' id='quantity' defaultValue='2'/>
                 <button onClick={() => this.buyStock()}>BUY</button>
-                {this.state.alerts.map((alert, i) => <FormAlert success= { alert.success } msg = { alert.msg } key = { i } />)}
+                {this.state.alerts.map((alert, i) => <FormAlert success={this.state.success} msg={alert.msg} key = {i} />)}
             </div>
         )
     }
 }
 
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (user) => dispatch({ type: 'UPDATE_USER', payload: user })
+    }
+}
 
-export default StockDetails;
+
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(StockDetails);

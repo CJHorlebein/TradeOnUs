@@ -23,17 +23,17 @@ let UserSchema = new mongoose.Schema({
         default: Date.now
     },
     history: {
-        type: [String]
+        type: mongoose.Mixed
     },
     watch: {
-        type: [String]
+        type: mongoose.Mixed
     },
     funds: {
         type: Number
     },
-    stocks: [{ 
-        type: [String]
-    }]
+    stocks: { 
+        type: mongoose.Mixed
+    }
 })
 
 let User = mongoose.model('User', UserSchema);

@@ -7,27 +7,7 @@ import Portfolio from './Portfolio'
 
 let Account = (props) => {
     let { email, fname, lname, funds, stocks } = props.state.user;
-    if (email) { return <Redirect to='/login' /> }
-
-    email = 'aaaa@aa.aa';
-    fname = 'Aaaaaa';
-    lname = 'Aaaaaa';
-    funds = 10000;
-    stocks = [
-        {
-            latestPrice: 200,
-            quantity: 200,
-            companyName: 'Tesla',
-            symbol: 'TSLA'
-        },
-        {
-            latestPrice: 200,
-            quantity: 200,
-            companyName: 'Tesla',
-            symbol: 'TSLA'
-        },
-    ];
-
+    if (!email) { return <Redirect to='/login' /> }
 
     return (
         <div style={css.box}>
@@ -50,14 +30,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        updateUser: (user) => dispatch({ type: 'UPDATE_USER', payload: user })
-    }
-}
-
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(withRouter(Account));
