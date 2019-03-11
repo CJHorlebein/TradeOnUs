@@ -4,8 +4,7 @@ import * as css from './StockRowCss';
 
 
 let Portfolio = ({funds, stocks}) => {
-    let stockList = Object.keys(stocks);
-    console.log(stockList);
+    let stockList = Array.from(Object.keys(stocks));
     return (
         <table style={css.table}>
             <thead>
@@ -14,6 +13,7 @@ let Portfolio = ({funds, stocks}) => {
                     <th style={css.tCol}>Company Name</th>
                     <th style={css.tCol}>Quantity</th>
                     <th style={css.tCol}>Cost</th>
+                    <th style={css.tCol}>Total</th>
                     <th style={css.tCol}>Total</th>
                 </tr>
             </thead>

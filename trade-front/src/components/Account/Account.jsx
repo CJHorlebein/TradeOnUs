@@ -30,8 +30,14 @@ let mapStateToProps = (state) => {
     }
 }
 
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (user) => dispatch({ type: 'UPDATE_USER', payload: user })
+    }
+}
+
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(withRouter(Account));

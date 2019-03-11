@@ -68,8 +68,9 @@ router.post('/buy/:symbol/:amount', authUser, (req, res, next) => {
     else{
         tradeStock(req.user.email, symbol, amount)
             .then(user => {
+                console.log(user);
                 res.status(200).send({
-                    ...user._doc,
+                    ...user,
                     password: undefined,
                     _id: undefined,
                     date: undefined

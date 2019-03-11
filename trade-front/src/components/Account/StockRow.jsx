@@ -1,13 +1,16 @@
 import React from 'react';
 
 
-let StockRow = ({ stock }) => (
+let StockRow = ({ symbol, stock }) => (
     <tr>
-        <td>{stock.ticker}</td>
-        <td>{stock.name}</td>
+        <td>{symbol}</td>
+        <td>{stock.companyName}</td>
         <td>{stock.quantity}</td>
         <td>{stock.price}</td>
-        <td>100</td>
+        <td>
+            <input type='number' />
+            <button>Sell</button>
+        </td>
     </tr>
 )
 

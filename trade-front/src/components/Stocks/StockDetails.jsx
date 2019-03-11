@@ -15,15 +15,12 @@ class StockDetails extends Component {
         this.state = initialState;
     }
     buyStock() {
-        // https://iextrading.com/developer/docs/#support
-        
         let num = document.getElementById('quantity').value;
         let sym = this.props.stock.symbol
-        console.log('axios called')
         axios.post(`/api/buy/${sym}/${num}`)
             .then(res => {
-                console.log(res);
                 this.props.updateUser(res.data)
+                console.log(res)
                 this.setState({
                     alerts: [
                         { msg: "Stock Purchased Successfully"}
@@ -32,7 +29,6 @@ class StockDetails extends Component {
                 })
             })
             .catch(err => {
-                console.log('err')
                 this.setState({
                     alerts:[
                         {...err.response.data}
@@ -42,7 +38,7 @@ class StockDetails extends Component {
             })
     }
     render(){
-        let { symbol, latestPrice, companyName } = this.props.stock
+        let { symbol, latestPrice, companyName } = this.props.stock;
         return (
             <div>
                 {symbol}
@@ -62,9 +58,14 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
+let mapStateToProps = (state) => {
+    return {
+        state
+    }
+}
 
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(StockDetails);
