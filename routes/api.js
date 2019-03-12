@@ -25,14 +25,10 @@ function updateStocks(user, cost, symbol, companyName, amount){
         }
     }   
 
-    let newStocks = {
-            ...stocks,
-            [symbol]: stock
-        }
-    if(newStocks[symbol].quantity < 1){
-        delete newStocks[symbol];
-    }
-   return {
+    let newStocks = { ...stocks, [symbol]: stock }
+    if( newStocks[symbol].quantity < 1 ){ delete newStocks[symbol]; }
+
+    return {
         ...user._doc,
         funds: (funds - cost).toFixed(2),
         stocks: newStocks

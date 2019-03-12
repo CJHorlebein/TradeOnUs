@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import StockRow from './StockRow';
-import * as css from './StockRowCss';
+// import * as css from './StockRowCss';
 
 
 let StockList = (props) => {

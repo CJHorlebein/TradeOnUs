@@ -38,7 +38,7 @@ class StockRow extends Component{
                 <td>{stock.quantity}</td>
                 <td>{stock.price}</td>
                 <td>
-                    <input id='amount' type='number' id={symbol} defaultValue='1'/>
+                    <input type='number' id={symbol} defaultValue='1'/>
                     <button onClick={() => this.sellStock()}>Sell</button>
                 </td>
             </tr>
