@@ -12,7 +12,7 @@ class StockRow extends Component{
         this.state = initialState;
     }
     sellStock(){
-        let amount = document.getElementById('amount').value;
+        let amount = document.getElementById(this.props.symbol).value;
         let url = `/api/sell/${this.props.symbol}/${amount}`;
         axios.post(url)
             .then(res => {
@@ -38,7 +38,7 @@ class StockRow extends Component{
                 <td>{stock.quantity}</td>
                 <td>{stock.price}</td>
                 <td>
-                    <input id='amount' type='number' defaultValue='1'/>
+                    <input id='amount' type='number' id={symbol} defaultValue='1'/>
                     <button onClick={() => this.sellStock()}>Sell</button>
                 </td>
             </tr>

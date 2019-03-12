@@ -85,7 +85,7 @@ router.post('/sell/:symbol/:amount', authUser, (req, res, next) => {
     let errors = []
     if (!symbol) { errors.push({ msg: 'No symbol selected' }) }
     if (amount % 1 != 0) { errors.push({ msg: 'Cannot sell partial shares' }) }
-    if (!amount && amount < 1) { errors.push({ msg: 'Must sell at least 1 share' }) }
+    if (!amount || amount < 1) { errors.push({ msg: 'Must sell at least 1 share' }) }
     if (errors.length > 0) { res.status(422).send(errors) }
     else{
         tradeStock(req.user.email, symbol, amount * -1)
