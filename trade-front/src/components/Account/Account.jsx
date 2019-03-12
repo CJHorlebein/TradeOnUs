@@ -6,9 +6,8 @@ import Portfolio from './Portfolio'
 
 
 let Account = (props) => {
-    let { email, fname, lname, funds, stocks } = props.state.user;
+    let { email, lname, fname, funds } = props.state.user
     if (!email) { return <Redirect to='/login' /> }
-
     return (
         <div style={css.box}>
             <div style={css.header}>Account Info</div>
@@ -18,7 +17,7 @@ let Account = (props) => {
                     <div>{email}</div>
                 </div>
                 <hr />
-                <Portfolio stocks={stocks} funds={funds}/>
+                <Portfolio funds={funds} />
             </div>
         </div>
     )

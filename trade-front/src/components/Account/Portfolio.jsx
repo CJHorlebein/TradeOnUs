@@ -1,10 +1,10 @@
 import React from 'react';
-import StockRow from './StockRow';
+import { connect } from 'react-redux';
+import StockList from './StockList';
 import * as css from './StockRowCss';
 
 
-let Portfolio = ({funds, stocks}) => {
-    let stockList = Array.from(Object.keys(stocks));
+let Portfolio = ({ funds }) => {
     return (
         <table style={css.table}>
             <thead>
@@ -17,8 +17,8 @@ let Portfolio = ({funds, stocks}) => {
                     <th style={css.tCol}>Total</th>
                 </tr>
             </thead>
+            <StockList />
             <tbody>
-                {stockList.map((stock, i) => <StockRow key={i} symbol={stock} stock={stocks[stock]}/>)}
                 <tr style={css.tHeaders}>
                     <th colSpan="4">Funds</th>
                     <td>{funds}</td>
@@ -28,4 +28,19 @@ let Portfolio = ({funds, stocks}) => {
     )
 }
 
-export default Portfolio;
+let mapStateToProps = (state) => {
+    return {
+        state
+    }
+}
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (user) => dispatch({ type: 'UPDATE_USER', payload: user })
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Portfolio);

@@ -42,12 +42,12 @@ class RegisterForm extends Component {
                 <h3 style={css.subHeader}><span>Make your money work for you!</span></h3>
                 <form onSubmit={(e) => this.submitForm(e)} style={css.formField}>
                     <div style={css.nameFields}>
-                        <input style={css.nameField} type='text' id='fname' placeholder='First Name' />
-                        <input style={css.nameField} type='text' id='lname' placeholder='Last Name' />
+                        <input style={css.nameField} type='text' id='fname' placeholder='First Name' defaultValue='bbbbbb'/>
+                        <input style={css.nameField} type='text' id='lname' placeholder='Last Name' defaultValue='bbbbbb'/>
                     </div>
-                    <input style={css.field} type='text' id='email' placeholder='Email' />
-                    <input style={css.field} type='password' id='password' placeholder='Password' />
-                    <input style={css.field} type='password' id='password2' placeholder='Confirm Password' />
+                    <input style={css.field} type='text' id='email' placeholder='Email' defaultValue='bbbbbb'/>
+                    <input style={css.field} type='password' id='password' placeholder='Password' defaultValue='bbbbbb'/>
+                    <input style={css.field} type='password' id='password2' placeholder='Confirm Password' defaultValue='bbbbbb'/>
                     <button style={css.button} type='submit'>Submit</button>
                 </form>
             </div>
