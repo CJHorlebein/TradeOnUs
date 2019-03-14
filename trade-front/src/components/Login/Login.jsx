@@ -18,7 +18,7 @@ class Login extends Component{
         })
     }
     render(){
-        let sizeStyle = window.innerWidth > 1200 ? css.container : css.nothing
+        if(window.innerWidth > 1200){var sizeStyle = css.container;}
         return (
             <div style={css.box}>
                 <div style={css.mainContainer}>

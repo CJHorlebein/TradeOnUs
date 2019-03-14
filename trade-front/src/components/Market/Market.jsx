@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as css from './MarketCss'
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
+import Scores from './Scores';
 
 class Market extends Component{
     constructor(props){
@@ -31,11 +32,19 @@ class Market extends Component{
     }
     render(){
         let { email, fname, lname, funds, history, watch, stocks } = this.props.state.user;
-        if (!email) { return <Redirect to='/login' /> }
+        // if (email) { return <Redirect to='/login' /> }
         return (
             <div style={css.box}>
-                <h1>Market</h1>
-                <button onClick={() => this.addMoney()}>MONEY</button>
+                <div style={css.header}>Play the Market</div>
+                <div>
+                    <div>
+
+                    </div>
+                    <div>
+                        <Scores />
+                        <button onClick={() => this.addMoney()}>MONEY</button>
+                    </div>
+                </div>
             </div>
         )
     }

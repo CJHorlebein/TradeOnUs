@@ -17,7 +17,7 @@ class StockDetails extends Component {
     buyStock() {
         let num = document.getElementById('quantity').value;
         let sym = this.props.stock.symbol
-        axios.post(`/api/buy/${sym}/${num}`)
+        axios.post(`/stocks/buy/${sym}/${num}`)
             .then(res => {
                 this.props.updateUser(res.data)
                 this.setState({

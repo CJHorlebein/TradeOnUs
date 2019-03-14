@@ -16,6 +16,7 @@ class Stocks extends Component{
     searchStock(e){
         e.preventDefault();
         let ref = document.getElementById('ref').value;
+        // https://api.iextrading.com/1.0/stock/aapl/quote?filter=symbol,companyName,latestPrice
         let url = `https://api.iextrading.com/1.0/stock/${ref}/quote?filter=symbol,companyName,latestPrice`
         axios.get(url).then(res => {
             this.setState({

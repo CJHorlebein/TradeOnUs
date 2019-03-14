@@ -33,6 +33,7 @@ app.use(passport.session());
 // Routes
 // app.use('/api', (req, res, next) => req.ip == '162.255.119.154' ? next() : res.end());
 app.use('/users', require('./routes/users'));
+app.use('/stocks', require('./routes/stocks'));
 app.use('/api', require('./routes/api'));
 
 

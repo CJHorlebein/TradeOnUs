@@ -1,6 +1,8 @@
 export let box = {
-    margin: '3em auto',
+    margin: '0 auto',
+    paddingTop: '3em',
     borderRadius: '8px',
+    minHeight: '70vh',
     width: '90%',
     color: '#15232D'
 }

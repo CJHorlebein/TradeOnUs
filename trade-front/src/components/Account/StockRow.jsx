@@ -13,7 +13,7 @@ class StockRow extends Component{
     }
     sellStock(){
         let amount = document.getElementById(this.props.symbol).value;
-        let url = `/api/sell/${this.props.symbol}/${amount}`;
+        let url = `/stocks/sell/${this.props.symbol}/${amount}`;
         axios.post(url)
             .then(res => {
                 this.props.updateUser(res.data)

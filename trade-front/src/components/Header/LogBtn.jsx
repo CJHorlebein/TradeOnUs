@@ -23,7 +23,7 @@ class LogBtn extends Component{
         axios.get('/users/logout').then(e => this.props.logout())
     }
     render(){
-        let {fname, email } = this.props.state.user;
+        let { email, fname } = this.props.user
         if (email === undefined) return <NavLink style={btn} to="/login">Login</NavLink>
         return (
             <div>
@@ -37,7 +37,7 @@ class LogBtn extends Component{
 let mapStateToProps = (state) => {
     return {
         logout: state.logout,
-        state
+        user: state.user
     }
 }
 

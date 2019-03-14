@@ -1,5 +1,6 @@
 export let box = {
     padding: '5vw 5vw 0',
+    minHeight: '70vh'
 }
 
 export let mainContainer = {
@@ -10,9 +11,7 @@ export let mainContainer = {
 export let container = {
     width: '50%'
 }
-export let nothing = {
-    
-}
+
 export let buttons = {
     textAlign: 'center'
 }

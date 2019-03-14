@@ -7,7 +7,6 @@ import StockRow from './StockRow';
 let StockList = (props) => {
     let { stocks } = props.state.user
     let stockList = stocks ? Array.from(Object.keys(stocks)) : [];
-    console.log(stockList);
     return (
         <tbody>
             {stockList.map((stock, i) => <StockRow key={i} symbol={stock} stock={stocks[stock]} />)}

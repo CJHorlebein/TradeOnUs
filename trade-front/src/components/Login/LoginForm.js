@@ -44,7 +44,7 @@ class LoginForm extends Component{
 
 let mapStateToProps = (state) => {
     return {
-        addUser: state.addUser
+        scores: state.scores
     }
 }
 
