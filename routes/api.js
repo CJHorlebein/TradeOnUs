@@ -6,7 +6,7 @@ const axios = require('axios');
 // db Models
 const User = require('../models/User');
 const Scores = require('../models/Scores');
-
+const stocks = require('./stocks.json');
 
 function makeScores(user, funds){
     const scores = new Scores({
@@ -27,6 +27,11 @@ function makeScores(user, funds){
     scores.save();
 }
 
+// return stock symbol
+router.get('/companies', (req, res) => {
+    let pos = ~~(stocks.symbols.length * Math.random())
+    res.status(200).json({symbol: stocks.symbols[pos]})
+})
 
 // Retrieve high scores
 router.get('/scores', (req, res) => {

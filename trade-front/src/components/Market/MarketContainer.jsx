@@ -8,8 +8,10 @@ import WorstFour from './Games/WorstFour'
 import Predictions from './Games/Predictions'
 import UpsDowns from './Games/UpsDowns'
 
+
+
 let MarketContainer = (props) => {
-    let { game } = props.state;
+    let { game } = props;
     if(!game.started){
         return <GameChoice />
     }
@@ -22,7 +24,7 @@ let MarketContainer = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        state
+        game: state.game
     }
 }
 

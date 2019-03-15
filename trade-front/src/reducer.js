@@ -2,7 +2,7 @@ const initialState = {
     user: {},
     game: {
         started: false,
-        position: 0,
+        positions: [],
         mode: 0,
         bet: 0,
         symbol: ''
@@ -40,6 +40,7 @@ const reducer = (state = initialState, action) => {
             game: {
                 ...state.game,
                 started: true,
+                positions: payload.stocks,
                 mode: payload.mode,
                 bet: payload.bet
             }
@@ -48,10 +49,18 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             game: {
-                position: payload.position
+                position: payload.positions
             }
         }
-    } else if(type === 'END_GAME'){
+    } else if(type === 'UPDATE_SYMBOL'){
+        return {
+            ...state,
+            game: {
+                ...state.game,
+                symbol: payload
+            }
+        }
+    } else if(type === 'RESET_GAME'){
         return {
             ...state,
             game: {

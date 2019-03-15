@@ -38,7 +38,7 @@ class Market extends Component{
                 <div style={css.header}>Play the Market</div>
                 <div style={css.buttons}>
                     <button style={css.button} onClick={() => this.addMoney()}>MONEY</button>
-                    <button style={css.button} onClick={() => this.props.endGame()}>RESET</button>
+                    <button style={css.button} onClick={() => this.props.resetGame()}>RESET</button>
                 </div>
                 <MarketContainer />
             </div>
@@ -55,7 +55,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
         updateUser: (user) => dispatch({ type: 'UPDATE_USER', payload: user }),
-        endGame: () => dispatch({ type: 'END_GAME'})
+        resetGame: () => dispatch({ type: 'RESET_GAME'})
     }
 }
 
