@@ -31,8 +31,8 @@ class Market extends Component{
             })
     }
     render(){
-        let { email, fname, lname, funds, history, watch, stocks } = this.props.state.user;
-        // if (email) { return <Redirect to='/login' /> }
+        let { email } = this.props.state.user;
+        if (email) { return <Redirect to='/login' /> }
         return (
             <div style={css.box}>
                 <div style={css.header}>Play the Market</div>

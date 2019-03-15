@@ -7,7 +7,19 @@ const initialState = {
         bet: 0,
         symbol: ''
     },
-    scores: []
+    scores: [],
+    results: [
+        3.1,
+        -3.3,
+        -21.6,
+        -3.8,
+        -19.9,
+        5.3,
+        0,
+        -26.9,
+        4.4,
+        8.9
+    ]
 }
 
 const reducer = (state = initialState, action) => {

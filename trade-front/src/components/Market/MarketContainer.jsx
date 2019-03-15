@@ -8,7 +8,6 @@ import WorstFour from './Games/WorstFour'
 import Predictions from './Games/Predictions'
 import UpsDowns from './Games/UpsDowns'
 
-
 let MarketContainer = (props) => {
     let { game } = props.state;
     if(!game.started){
