@@ -9,7 +9,6 @@ class Scores extends Component{
             .then(res => this.props.updateScores(res.data))
     }
     render(){
-        console.log(this.props)
         return (
             <div>
                 {this.props.state.scores.map(({name, funds}, i) => <div key={i}>{name}:{funds}</div>)}

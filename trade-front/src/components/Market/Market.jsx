@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as css from './MarketCss'
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import Scores from './Scores';
+import MarketContainer from './MarketContainer'
 
 class Market extends Component{
     constructor(props){
@@ -36,15 +36,11 @@ class Market extends Component{
         return (
             <div style={css.box}>
                 <div style={css.header}>Play the Market</div>
-                <div>
-                    <div>
-
-                    </div>
-                    <div>
-                        <Scores />
-                        <button onClick={() => this.addMoney()}>MONEY</button>
-                    </div>
+                <div style={css.buttons}>
+                    <button style={css.button} onClick={() => this.addMoney()}>MONEY</button>
+                    <button style={css.button} onClick={() => this.props.endGame()}>RESET</button>
                 </div>
+                <MarketContainer />
             </div>
         )
     }
@@ -58,7 +54,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        updateUser: (user) => dispatch({ type: 'UPDATE_USER', payload: user })
+        updateUser: (user) => dispatch({ type: 'UPDATE_USER', payload: user }),
+        endGame: () => dispatch({ type: 'END_GAME'})
     }
 }
 

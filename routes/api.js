@@ -12,20 +12,19 @@ function makeScores(user, funds){
     const scores = new Scores({
         name: 'high_scores',
         scores: [
-            { funds: 20000, name: 'CJ'},
-            { funds: 19000, name: 'John'},
-            { funds: 18000, name: 'Bill'},
-            { funds: 17000, name: 'Sandy'},
-            { funds: 16000, name: 'Amanda'},
-            { funds: 15000, name: 'Fred'},
-            { funds: 14000, name: 'Hank'},
-            { funds: 13000, name: 'Susan'},
-            { funds: 12000, name: 'Sam'},
-            { funds: 11000, name: 'Joe'},
+            { funds: 20000, email: '', name: 'CJ'},
+            { funds: 19000, email: '', name: 'John'},
+            { funds: 18000, email: '', name: 'Bill'},
+            { funds: 17000, email: '', name: 'Sandy'},
+            { funds: 16000, email: '', name: 'Amanda'},
+            { funds: 15000, email: '', name: 'Fred'},
+            { funds: 14000, email: '', name: 'Hank'},
+            { funds: 13000, email: '', name: 'Susan'},
+            { funds: 12000, email: '', name: 'Sam'},
+            { funds: 11000, email: '', name: 'Joe'},
         ]
     })
     scores.save();
-    return null
 }
 
 

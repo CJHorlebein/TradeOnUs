@@ -3,8 +3,7 @@ const initialState = {
     game: {
         started: false,
         position: 0,
-        type: '',
-        odds: 0,
+        mode: 0,
         bet: 0,
         symbol: ''
     },
@@ -27,8 +26,10 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             game: {
+                ...state.game,
                 started: true,
-                ...payload
+                mode: payload.mode,
+                bet: payload.bet
             }
         }
     } else if(type === 'UPDATE_GAME'){
@@ -43,8 +44,8 @@ const reducer = (state = initialState, action) => {
             ...state,
             game: {
                 started: false,
-                type: '',
-                odds: 0,
+                position: 0,
+                mode: 0,
                 bet: 0,
                 symbol: ''
             }

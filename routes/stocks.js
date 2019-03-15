@@ -37,7 +37,6 @@ function updateStocks(user, cost, symbol, companyName, amount) {
     }
 }
 
-
 async function tradeStock(user, symbol, amount) {
     let cost, companyName;
     let url = `https://api.iextrading.com/1.0/stock/${symbol}/quote?filter=latestPrice,companyName`
@@ -50,6 +49,29 @@ async function tradeStock(user, symbol, amount) {
     return User.findOneAndReplace({ email: user.email }, newUser)
         .then(e => { return newUser })
         .catch(err => console.log(error))
+}
+
+function updateScores({fname, funds, email}){
+    let newScores = []
+    Scores.findOne({ name: 'high_scores'})
+        .then(({ scores }) => {
+            scores.map(score =>{
+                if (funds > score.funds) {
+                    newScores.push({ funds, email, name: fname})
+                    funds = 0;
+                }
+                if(score.email !== email){newScores.push(score);}
+            })
+            return newScores.length > 10 ? newScores.slice(0, -1) : newScores;
+        })
+        .then(res => {
+            Scores.findOneAndReplace({ name: 'high_scores' }, {
+                    name: 'high_scores',
+                    scores: [...res]
+                })
+                .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
 }
 
 // Buy Page
@@ -86,6 +108,7 @@ router.post('/sell/:symbol/:amount', authUser, (req, res, next) => {
     else {
         tradeStock(req.user, symbol, amount * -1)
             .then(user => {
+                updateScores(user);
                 res.status(200).send({
                     ...user,
                     password: undefined,
