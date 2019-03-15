@@ -32,7 +32,7 @@ class Market extends Component{
     }
     render(){
         let { email } = this.props.state.user;
-        if (email) { return <Redirect to='/login' /> }
+        // if (email) { return <Redirect to='/login' /> }
         return (
             <div style={css.box}>
                 <div style={css.header}>Play the Market</div>

@@ -14,3 +14,8 @@ export let gameSquare = {
 export let scores = {
     margin: '1em',
 }
+
+export let alerts = {
+    width: '60%',
+    margin: '0 auto'
+}

@@ -16,9 +16,9 @@ let MarketContainer = (props) => {
         return <GameChoice />
     }
     else if (game.mode === 1){ return <UpsDowns />}
-    else if (game.mode === 2){ return <BestFour />}
-    else if (game.mode === 3){ return <WorstFour />}
-    else if (game.mode === 4){ return <Predictions />}
+    else if (game.mode === 2){ return <Predictions />}
+    else if (game.mode === 3){ return <BestFour />}
+    else if (game.mode === 4){ return <WorstFour />}
 }
 
 
