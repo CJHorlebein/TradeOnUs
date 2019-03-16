@@ -15,7 +15,7 @@ class Market extends Component{
         this.state = initialState;
     }
     addMoney(){
-        axios.post('/api/money/10000')
+        axios.post('/api/money/500')
             .then(res => {
                 this.props.updateUser(res.data)
                 this.setState({
@@ -36,6 +36,7 @@ class Market extends Component{
         return (
             <div style={css.box}>
                 <div style={css.header}>Play the Market</div>
+                <div></div>
                 <div style={css.buttons}>
                     <button style={css.button} onClick={() => this.addMoney()}>MONEY</button>
                     <button style={css.button} onClick={() => this.props.resetGame()}>RESET</button>

@@ -8,20 +8,21 @@ const User = require('../models/User');
 const Scores = require('../models/Scores');
 const stocks = require('./stocks.json');
 
-function makeScores(user, funds){
+function makeScores(){
+    console.log('New Scores')
     const scores = new Scores({
         name: 'high_scores',
         scores: [
-            { funds: 20000, email: '', name: 'CJ'},
-            { funds: 19000, email: '', name: 'John'},
-            { funds: 18000, email: '', name: 'Bill'},
-            { funds: 17000, email: '', name: 'Sandy'},
-            { funds: 16000, email: '', name: 'Amanda'},
-            { funds: 15000, email: '', name: 'Fred'},
-            { funds: 14000, email: '', name: 'Hank'},
-            { funds: 13000, email: '', name: 'Susan'},
-            { funds: 12000, email: '', name: 'Sam'},
-            { funds: 11000, email: '', name: 'Joe'},
+            { funds: 12000, email: 'agfdsdfgsf', name: 'Ron'},
+            { funds: 11500, email: 'bgfdsdfgsf', name: 'John'},
+            { funds: 11000, email: 'cgfdsdfgsf', name: 'Bill'},
+            { funds: 10500, email: 'dgfdsdfgsf', name: 'Sandy'},
+            { funds: 10000, email: 'egfdsdfgsf', name: 'Amanda'},
+            { funds: 9500,  email: 'fgfdsdfgsf', name: 'Fred'},
+            { funds: 8500,  email: 'ggfdsdfgsf', name: 'Hank'},
+            { funds: 8000,  email: 'hgfdsdfgsf', name: 'Susan'},
+            { funds: 7500,  email: 'igfdsdfgsf', name: 'Sam'},
+            { funds: 7000,  email: 'jgfdsdfgsf', name: 'Joe'},
         ]
     })
     scores.save();
@@ -42,7 +43,7 @@ router.get('/scores', (req, res) => {
 
 // Add money route
 router.post('/money/:sum', authUser, (req, res) => {
-    // makeScores();
+    makeScores();
     let sum = req.params.sum * 1;
     if (!sum && sum < 0) { res.status(400).send({ msg: 'Amount added must be greater than 0' }) }
     else {
@@ -61,6 +62,9 @@ router.post('/money/:sum', authUser, (req, res) => {
             }).catch(err => res.status(400).send({msg: 'Something Happened'}))
     }
 });
+
+
+
 
 
 module.exports = router;

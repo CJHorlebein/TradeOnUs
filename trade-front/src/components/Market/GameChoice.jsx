@@ -74,7 +74,7 @@ class GameChoice extends Component{
                         <div style={css.gameSquare}>
                             <h4>Worst of Four</h4>
                             <h5>4 stock to play</h5>
-                            <button onClick={() => this.playGame(1, 1)}>PLAY!</button>
+                            <button onClick={() => this.playGame(2, 1)}>PLAY!</button>
                             <p>Predict which stock will perform the Worst</p>
                         </div>
                     </div>

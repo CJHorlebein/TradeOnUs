@@ -11,9 +11,11 @@ const Scores = require('../models/Scores');
 function updateStocks(user, cost, symbol, companyName, amount) {
     let { stocks, funds } = user;
     let stock
+
     if (stocks && stocks[symbol]) {
         let { price, quantity } = stocks[symbol];
-        let avg = (price * quantity + cost) / (amount + quantity)
+        let newAvg = (price * quantity + cost) / (amount + quantity)
+        let avg = amount > 0 ? newAvg : user.stocks[symbol].price*1
         stock = {
             quantity: amount + quantity,
             price: avg.toFixed(2),
@@ -51,18 +53,41 @@ async function tradeStock(user, symbol, amount) {
         .catch(err => console.log(error))
 }
 
-function updateScores({fname, funds, email}){
-    let newScores = []
+// Add money route
+router.post('/update/:symbol/:amount', authUser, (req, res) => {
+    let { symbol, amount } = req.params;
+    let { companyName, price } = req.user.stocks[symbol]
+    let user = updateStocks(req.user, amount * price, symbol, companyName, amount*1)
+    User.findOneAndReplace({ email: user.email }, user)
+        .then(e => {
+            res.status(200).send({
+                ...user,
+                password: undefined,
+                _id: undefined,
+                date: undefined
+            })
+        }).catch(err => res.status(400).send({ msg: 'Something Happened' }))
+});
+
+function updateScores({ fname, funds, email }){
+    let user = { funds, email, name: fname }
     Scores.findOne({ name: 'high_scores'})
         .then(({ scores }) => {
-            scores.map(score =>{
-                if (funds > score.funds) {
-                    newScores.push({ funds, email, name: fname})
-                    funds = 0;
+            let temp = [];
+            scores.forEach(score =>{
+                if (funds > (score.funds * 1)){
+                    temp.push(user)
                 }
-                if(score.email !== email){newScores.push(score);}
+                temp.push(score)
             })
-            return newScores.length > 10 ? newScores.slice(0, -1) : newScores;
+            let email = []
+            let high_scores = temp.filter(score => {
+                if(!email.includes(score.email)){
+                    email.push(score.email)
+                    return score;
+                }
+            })
+            return high_scores.length > 10 ? high_scores.slice(0, 10) : high_scores;
         })
         .then(res => {
             Scores.findOneAndReplace({ name: 'high_scores' }, {
@@ -92,7 +117,7 @@ router.post('/buy/:symbol/:amount', authUser, (req, res, next) => {
                     date: undefined
                 })
             })
-            .catch(err => res.status(400).send({ msg: '401B: Something Happened' }));
+            .catch(err => res.status(400).send({ msg: err.msg }));
     }
 });
 

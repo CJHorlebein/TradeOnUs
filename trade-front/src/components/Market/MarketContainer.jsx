@@ -3,18 +3,16 @@ import { connect } from 'react-redux';
 import GameChoice from './GameChoice';
 
 // Game Modes Routes
-import BestFour from './BestFour'
-import WorstFour from './WorstFour'
-
+import FourGraphs from './FourGraphs';
 
 
 let MarketContainer = (props) => {
     let { game } = props;
     if(!game.started){
         return <GameChoice />
+    } else {
+        return <FourGraphs />
     }
-    else if (game.mode === 1){ return <BestFour />}
-    else if (game.mode === 2){ return <WorstFour />}
 }
 
 

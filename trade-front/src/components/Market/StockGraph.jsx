@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 let innerBox = {
     width: '15em',
@@ -13,21 +14,23 @@ let graph = {
     width: '100%'
 }
 
-class SmallStockGraph extends Component {
+class StockGraph extends Component {
     constructor(props){
         super(props)
     }
+
     resolveGame(){
-        console.log(this.props.card.high)
-        let { mode, card } = this.props
+        let { mode, card, bet, symbol } = this.props
         if(this.props.revealed){
             return null
-        } else if (mode === 1 && card.high){
+        } else if ((mode === 1 && card.high) || (mode === 2 && card.low)){
+            axios.post(`/stocks/update/${symbol}/${bet * 4}`)
+                .then(res => this.props.updateUser(res.data))
             this.props.winGame()
-        } else if (mode === 2 && card.low){
-            this.props.winGame()
+        } else{
+            axios.post(`/stocks/update/${symbol}/-${bet}`)
+                .then(res => this.props.updateUser(res.data))
         }
-        
         this.props.updateGame();
     }
     render(){
@@ -36,12 +39,15 @@ class SmallStockGraph extends Component {
         return <div style={innerBox}>
             <img style={graph} src={require(`./img/${card}.png`)} alt='A graph of the value over the year'/>
             <button onClick={() => this.resolveGame()}>Pick Me</button>
+            <p>{this.props.revealed ? this.props.card.value + '%' : ''}</p>
         </div>
     }
 }
 
 let mapStateToProps = (state) => {
     return {
+        bet: state.game.bet,
+        symbol: state.game.symbol,
         revealed: state.game.revealed,
         mode: state.game.mode
     }
@@ -50,11 +56,11 @@ let mapDispatchToProps = (dispatch) => {
     return {
         winGame: () => dispatch({type: 'WIN_GAME'}),
         updateGame: () => dispatch({type: 'UPDATE_GAME'}),
-        addUser: (user) => dispatch({type: 'ADD_USER', payload: user})
+        updateUser: (user) => dispatch({type: 'UPDATE_USER', payload: user})
     }
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SmallStockGraph)
+)(StockGraph)
