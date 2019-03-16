@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as css from './BestFourCss';
-import StockBox from './StockBox';
+import FormAlert from './FormAlert';
+import SmallStockGraph from './SmallStockGraph';
 
-let BestFour = ({ stocks }) => {
-    console.log(stocks)
+let BestFour = ({ positions, revealed, outcome }) => {
+    let msg = outcome ? 'You Win!!!' : 'You Loose!!!';
     return (
         <div>
             <h1>Best out of Four</h1>
+            {revealed ? <FormAlert success={outcome} msg={msg} /> : ''}
             <div style={css.box}>
-                {stocks.map((stock, i) => <StockBox card={stock} key={i} />)}
+                {positions.map((stock, i) => <SmallStockGraph card={stock} key={i} />)}
             </div>
         </div>
     )
@@ -17,7 +19,10 @@ let BestFour = ({ stocks }) => {
 
 let mapStateToProps = (state) => {
     return {
-        stocks : state.game.positions
+        outcome: state.game.outcome,
+        revealed: state.game.revealed,
+        positions: state.game.positions,
+
     }
 }
 

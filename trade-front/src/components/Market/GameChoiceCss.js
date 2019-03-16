@@ -7,8 +7,8 @@ export let gameSquare = {
     backgroundColor: 'beige',
     margin: '1em',
     padding: '1em',
-    width: '10em',
-    height: '9em'
+    width: '15em',
+    height: '14em'
 }
 
 export let scores = {

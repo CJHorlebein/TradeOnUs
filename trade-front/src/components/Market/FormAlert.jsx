@@ -1,7 +1,7 @@
 import React from 'react';
 
-var box = {
-    backgroundColor: '#DC5E04',
+let box = {
+    // backgroundColor: '#DC5E04',
     color: 'white',
     fontSize: '1.3rem',
     textAlign: 'center',
@@ -12,12 +12,11 @@ var box = {
 }
 
 let FormAlert = ({success, msg}) => {
-    if(success){
-        box = {
-            ...box,
-            backgroundColor: '#229922'
-        }
+    box = {
+        ...box,
+        backgroundColor: success ? '#229922' : '#DC5E04'
     }
+
     return (
         <div style={box}>
             <span>{msg}</span>

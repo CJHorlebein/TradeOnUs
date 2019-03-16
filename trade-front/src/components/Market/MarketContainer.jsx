@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import GameChoice from './GameChoice';
 
 // Game Modes Routes
-import BestFour from './Games/BestFour'
-import WorstFour from './Games/WorstFour'
-import Predictions from './Games/Predictions'
-import UpsDowns from './Games/UpsDowns'
+import BestFour from './BestFour'
+import WorstFour from './WorstFour'
 
 
 
@@ -15,10 +13,8 @@ let MarketContainer = (props) => {
     if(!game.started){
         return <GameChoice />
     }
-    else if (game.mode === 1){ return <UpsDowns />}
-    else if (game.mode === 2){ return <Predictions />}
-    else if (game.mode === 3){ return <BestFour />}
-    else if (game.mode === 4){ return <WorstFour />}
+    else if (game.mode === 1){ return <BestFour />}
+    else if (game.mode === 2){ return <WorstFour />}
 }
 
 

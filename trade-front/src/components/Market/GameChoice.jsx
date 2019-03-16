@@ -18,17 +18,17 @@ class GameChoice extends Component{
     componentDidMount(){
         if(!this.props.symbol){
             axios.get('/api/companies')
-                .then(res => this.props.updateSymbol(res.data.symbol))
-                // .then(res => this.props.updateSymbol('FB'))
+                // .then(res => this.props.updateSymbol(res.data.symbol))
+                .then(res => this.props.updateSymbol('FB'))
         }
     }
-    pickStocks(len){
+    pickStocks(){
         let stocks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         let gameStocks = [];
         let { values } = this.props
-        for (let i = 0; i < len; i++) {
+        for (let i = 0; i < 4; i++) {
             let pos = ~~(Math.random() * stocks.length);
-            gameStocks.push({ stock: stocks[pos], value: values[pos] });
+            gameStocks.push({ stock: stocks[pos], value: values[pos], low: false, high: false });
             stocks = [...stocks.slice(0, pos), ...stocks.slice(pos + 1)]
             values = [...values.slice(0, pos), ...values.slice(pos + 1)]
         }
@@ -36,17 +36,25 @@ class GameChoice extends Component{
     }
     playGame(mode, bet){
         let { symbol, stocks } = this.props
-        let stocksList = mode > 2 ? this.pickStocks(4) : this.pickStocks(1);
-        // this.props.startGame(mode, bet, stocksList)
-        if( stocks[symbol] && stocks[symbol].quantity > bet){
-            this.props.startGame(mode, bet, stocksList)
-        } else {
-            this.setState({
-                alerts: [
-                    {msg: `You need more shares of ${symbol} to play`}
-                ]
-            })
-        }
+        let low = {pos: -1, value: 100}
+        let high = {pos: -1, value: -100}
+        let stocksList = this.pickStocks(4);
+        stocksList.forEach((stock, i) => {
+            if(stock.value < low.value){low.pos = i; low.value = stock.value}
+            if(stock.value > high.value){high.pos = i; high.value = stock.value}
+        })
+        stocksList[low.pos].low = true
+        stocksList[high.pos].high = true
+        this.props.startGame(mode, bet, stocksList)
+        // if( stocks[symbol] && stocks[symbol].quantity > bet){
+        //     this.props.startGame(mode, bet, stocksList)
+        // } else {
+        //     this.setState({
+        //         alerts: [
+        //             {msg: `You need more shares of ${symbol} to play`}
+        //         ]
+        //     })
+        // }
     }
     render(){
         return (
@@ -58,26 +66,16 @@ class GameChoice extends Component{
                 <div style={css.content}>
                     <div>
                         <div style={css.gameSquare}>
-                            <h4>Ups and Downs</h4>
-                            <h5>1 to play</h5>
-                            <button onClick={() => this.playGame(1, 1)}>PLAY!</button>
-                        </div>
-                        <div style={css.gameSquare}>
-                            <h4>Stock Predictions</h4>
-                            <h5>8 stock to play</h5>
-                            <button onClick={() => this.playGame(2,8)}>PLAY!</button>
-                        </div>
-                    </div>
-                    <div>
-                        <div style={css.gameSquare}>
                             <h4>Best of Four</h4>
                             <h5>4 stock to play</h5>
-                            <button onClick={() => this.playGame(3, 4)}>PLAY!</button>
+                            <button onClick={() => this.playGame(1, 1)}>PLAY!</button>
+                            <p>Predict which stock will perform the Best</p>
                         </div>
                         <div style={css.gameSquare}>
                             <h4>Worst of Four</h4>
                             <h5>4 stock to play</h5>
-                            <button onClick={() => this.playGame(4, 4)}>PLAY!</button>
+                            <button onClick={() => this.playGame(1, 1)}>PLAY!</button>
+                            <p>Predict which stock will perform the Worst</p>
                         </div>
                     </div>
                     <div style={css.scores}>

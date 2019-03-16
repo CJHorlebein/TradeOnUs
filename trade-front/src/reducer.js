@@ -2,6 +2,8 @@ const initialState = {
     user: {},
     game: {
         started: false,
+        revealed: false,
+        outcome: false,
         positions: [],
         mode: 0,
         bet: 0,
@@ -34,6 +36,19 @@ const reducer = (state = initialState, action) => {
             ...state,
             user: {}
         }
+    } else if(type === 'UPDATE_SCORES'){
+        return {
+            ...state,
+            scores: payload
+        }
+    } else if(type === 'UPDATE_SYMBOL'){
+        return {
+            ...state,
+            game: {
+                ...state.game,
+                symbol: payload
+            }
+        }
     } else if(type === 'START_GAME'){
         return {
             ...state,
@@ -49,15 +64,16 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             game: {
-                position: payload.positions
+                ...state.game,
+                revealed: true
             }
         }
-    } else if(type === 'UPDATE_SYMBOL'){
+    } else if(type === 'WIN_GAME'){
         return {
             ...state,
             game: {
                 ...state.game,
-                symbol: payload
+                outcome: true
             }
         }
     } else if(type === 'RESET_GAME'){
@@ -65,16 +81,13 @@ const reducer = (state = initialState, action) => {
             ...state,
             game: {
                 started: false,
-                position: 0,
+                revealed: false,
+                outcome: false,
+                positions: [],
                 mode: 0,
                 bet: 0,
                 symbol: ''
             }
-        }
-    } else if(type === 'UPDATE_SCORES'){
-        return {
-            ...state,
-            scores: payload
         }
     } else {
         return state;
