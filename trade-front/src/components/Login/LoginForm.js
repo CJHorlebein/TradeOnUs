@@ -33,8 +33,8 @@ class LoginForm extends Component{
                 {this.state.msg !== '' ? <FormAlert success={true} msg={this.state.msg}/> : ''}
                 <div style={css.header}><em>Please sign in to continue...</em></div>
                 <form onSubmit={(e) => this.loginUser(e)} style={css.formField}>
-                    <input style={css.field} type='text' id='email' placeholder='Email' defaultValue='bbbbbb'/>
-                    <input style={css.field} type='Password' id='password' placeholder='password' defaultValue='bbbbbb'/>
+                    <input style={css.field} type='text' id='email' placeholder='Email'/>
+                    <input style={css.field} type='Password' id='password' placeholder='password'/>
                     <button style={css.button} type='submit'>Submit</button>
                 </form>
             </div>

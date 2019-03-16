@@ -1,24 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as css from './StockGraphCss'
 import axios from 'axios';
 
-let innerBox = {
-    width: '15em',
-    height: '15em',
-    margin: '1em',
-    backgroundColor: 'beige',
-    minWidth: '15em'
-}
-
-let graph = {
-    width: '100%'
-}
-
 class StockGraph extends Component {
-    constructor(props){
-        super(props)
-    }
-
     resolveGame(){
         let { mode, card, bet, symbol } = this.props
         if(this.props.revealed){
@@ -36,9 +21,9 @@ class StockGraph extends Component {
     render(){
         let card = this.props.card.stock;
         card += this.props.revealed ? 'F' : 'H'
-        return <div style={innerBox}>
-            <img style={graph} src={require(`./img/${card}.png`)} alt='A graph of the value over the year'/>
-            <button onClick={() => this.resolveGame()}>Pick Me</button>
+        return <div style={css.innerBox}>
+            <img style={css.graph} src={require(`./img/${card}.png`)} alt='A graph of the value over the year'/>
+            <button style={css.btns} onClick={() => this.resolveGame()}>Pick Me</button>
             <p>{this.props.revealed ? this.props.card.value + '%' : ''}</p>
         </div>
     }

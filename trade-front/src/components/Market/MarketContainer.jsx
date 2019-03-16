@@ -5,16 +5,10 @@ import GameChoice from './GameChoice';
 // Game Modes Routes
 import FourGraphs from './FourGraphs';
 
-
 let MarketContainer = (props) => {
     let { game } = props;
-    if(!game.started){
-        return <GameChoice />
-    } else {
-        return <FourGraphs />
-    }
+    return !game.started ? <GameChoice /> : <FourGraphs />
 }
-
 
 let mapStateToProps = (state) => {
     return {

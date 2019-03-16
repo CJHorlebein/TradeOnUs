@@ -18,8 +18,7 @@ class GameChoice extends Component{
     componentDidMount(){
         if(!this.props.symbol){
             axios.get('/api/companies')
-                // .then(res => this.props.updateSymbol(res.data.symbol))
-                .then(res => this.props.updateSymbol('FB'))
+                .then(res => this.props.updateSymbol(res.data.symbol))
         }
     }
     pickStocks(){
@@ -45,37 +44,36 @@ class GameChoice extends Component{
         })
         stocksList[low.pos].low = true
         stocksList[high.pos].high = true
-        this.props.startGame(mode, bet, stocksList)
-        // if( stocks[symbol] && stocks[symbol].quantity > bet){
-        //     this.props.startGame(mode, bet, stocksList)
-        // } else {
-        //     this.setState({
-        //         alerts: [
-        //             {msg: `You need more shares of ${symbol} to play`}
-        //         ]
-        //     })
-        // }
+        if( stocks && stocks[symbol].quantity > bet){
+            this.props.startGame(mode, bet, stocksList)
+        } else {
+            this.setState({
+                alerts: [
+                    {msg: `You need more shares of ${symbol} to play`}
+                ]
+            })
+        }
     }
     render(){
         return (
             <div>
-                <div>Current stock needed to play is... {this.props.symbol}</div>
+                <h3>Current stock needed to play is... <span style={css.selected}>{this.props.symbol}</span></h3>
                 <div style={css.alerts}>
                     {this.state.alerts.map((alert, i) => <FormAlert success={false} msg={alert.msg} key={i}/>)}
                 </div>
                 <div style={css.content}>
                     <div>
                         <div style={css.gameSquare}>
-                            <h4>Best of Four</h4>
-                            <h5>4 stock to play</h5>
-                            <button onClick={() => this.playGame(1, 1)}>PLAY!</button>
-                            <p>Predict which stock will perform the Best</p>
+                            <h2>Best of Four</h2>
+                            <h4>4 stock to play</h4>
+                            <button style={css.btns} onClick={() => this.playGame(1, 1)}>PLAY!</button>
+                            <p style={css.description}>Predict which stock will perform the Best</p>
                         </div>
                         <div style={css.gameSquare}>
-                            <h4>Worst of Four</h4>
-                            <h5>4 stock to play</h5>
-                            <button onClick={() => this.playGame(2, 1)}>PLAY!</button>
-                            <p>Predict which stock will perform the Worst</p>
+                            <h2>Worst of Four</h2>
+                            <h4>4 stock to play</h4>
+                            <button style={css.btns} onClick={() => this.playGame(2, 1)}>PLAY!</button>
+                            <p style={css.description}>Predict which stock will perform the Worst</p>
                         </div>
                     </div>
                     <div style={css.scores}>

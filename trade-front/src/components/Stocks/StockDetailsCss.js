@@ -1,22 +1,6 @@
 export let box = {
-    backgroundColor: 'white',
-    minHeight: '70vh',
-    textAlign: 'center',
+    marginTop: '2em'
 }
-
-export let header = {
-    marginTop: '1em',
-    fontSize: '3rem',
-    fontWeight: '700'
-}
-
-export let subHeader = {
-    display: 'flex',
-    justifyContent: 'space-around',
-    width: '40%',
-    margin: '.4em auto'
-}
-
 export let searchField = {
     padding: '.5em 1.2em',
     fontSize: '1rem',
@@ -30,4 +14,9 @@ export let searchBtn = {
     padding: '.5em 1.2em',
     fontSize: '1rem',
     margin: '.2em 0',
+}
+
+export let price = {
+    fontSize: '1.2rem',
+    fontWeight: '700',
 }

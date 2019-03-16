@@ -8,9 +8,9 @@ let FourGraphs = ({ positions, revealed, outcome, mode }) => {
     let msg = outcome ? 'You Win!!!' : 'You Loose!!!';
     return (
         <div>
-            <h1>{mode == 1 ? 'Best': 'Worst'} out of Four</h1>
+            <h1>{mode === 1 ? 'Best': 'Worst'} out of Four</h1>
             {revealed ? <FormAlert success={outcome} msg={msg} /> : ''}
-            <div style={css.box}>
+            <div style = {css.box}>
                 {positions.map((stock, i) => <StockGraph card={stock} key={i} />)}
             </div>
         </div>

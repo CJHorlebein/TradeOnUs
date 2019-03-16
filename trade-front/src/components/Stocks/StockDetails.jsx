@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import FormAlert from './FormAlert';
+import * as css from './StockDetailsCss';
 
 class StockDetails extends Component {
     constructor(props){
@@ -30,24 +31,31 @@ class StockDetails extends Component {
             .catch(err => {
                 this.setState({
                     alerts:[
-                        {...err.response.data}
+                        ...err.response.data
                     ],
                     success: false
                 })
             })
     }
     render(){
-        let { symbol, latestPrice, companyName } = this.props.stock;
+        let { latestPrice, companyName } = this.props.stock;
         return (
-            <div>
-                {symbol}
-                {latestPrice}
-                {companyName}
-                <input type='number' id='quantity' defaultValue='2'/>
-                <button onClick={() => this.buyStock()}>BUY</button>
+            <div style={css.box}>
+                <h2>{companyName}</h2>
+                <div>Price per share: <span style={css.price}>{latestPrice}</span></div>
+                <div>
+                    <input style={css.searchField} type='number' id='quantity' placeholder="shares"/>
+                    <button style={css.searchBtn} onClick={() => this.buyStock()}>BUY</button>
+                </div>
                 {this.state.alerts.map((alert, i) => <FormAlert success={this.state.success} msg={alert.msg} key = {i} />)}
             </div>
         )
+    }
+}
+
+let mapStateToProps = (state) => {
+    return {
+        state
     }
 }
 
@@ -57,11 +65,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let mapStateToProps = (state) => {
-    return {
-        state
-    }
-}
 
 
 export default connect(

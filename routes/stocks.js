@@ -105,7 +105,7 @@ router.post('/buy/:symbol/:amount', authUser, (req, res, next) => {
     let errors = []
     if (!symbol) { errors.push({ msg: 'No symbol Provided' }) }
     if (amount % 1 != 0) { errors.push({ msg: 'Cannot purchase partial shares' }) }
-    if (!amount && amount < 1) { errors.push({ msg: 'Must purchase at least 1 share' }) }
+    if (!amount || amount < 1) { errors.push({ msg: 'Must purchase at least 1 share' }) }
     if (errors.length > 0) { res.status(422).send(errors) }
     else {
         tradeStock(req.user, symbol, amount * 1)

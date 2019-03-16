@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import StockDetails from './StockDetails'
-
 class Stocks extends Component{
     constructor(props){
         super(props);
@@ -29,10 +28,14 @@ class Stocks extends Component{
         if (!email) { return <Redirect to='/login' /> }
         return (
             <div style={css.box}>
-                <h1>Buy Stocks {funds} </h1>
+                <div style={css.header}>Buy Stocks</div>
+                <div style={css.subHeader}>
+                    <h2 >Current Funds: {funds}</h2>
+                    {this.props.symbol ? <h2>Current Stock: {this.props.symbol}</h2> : ''}
+                </div>
                 <form onSubmit={(e) => this.searchStock(e)}>
-                    <input type='text' id='ref' defaultValue='FB'/>
-                    <button type='submit'>Search</button>
+                    <input style={css.searchField} type='text' id='ref'/>
+                    <button style={css.searchBtn} type='submit'>Search</button>
                 </form>
                 {this.state.results.map((stock, i) => <StockDetails stock={stock} key={i}/>)}
             </div>
@@ -42,6 +45,7 @@ class Stocks extends Component{
 
 let mapStateToProps = (state) => {
     return {
+        symbol: state.game.symbol,
         state
     }
 }
