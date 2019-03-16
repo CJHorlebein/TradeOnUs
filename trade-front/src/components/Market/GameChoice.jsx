@@ -44,7 +44,7 @@ class GameChoice extends Component{
         })
         stocksList[low.pos].low = true
         stocksList[high.pos].high = true
-        if( stocks && stocks[symbol].quantity > bet){
+        if( stocks && stocks[symbol] && stocks[symbol].quantity >= bet){
             this.props.startGame(mode, bet, stocksList)
         } else {
             this.setState({
@@ -65,13 +65,13 @@ class GameChoice extends Component{
                     <div>
                         <div style={css.gameSquare}>
                             <h2>Best of Four</h2>
-                            <h4>4 stock to play</h4>
+                            <h4>1 stock to play</h4>
                             <button style={css.btns} onClick={() => this.playGame(1, 1)}>PLAY!</button>
                             <p style={css.description}>Predict which stock will perform the Best</p>
                         </div>
                         <div style={css.gameSquare}>
                             <h2>Worst of Four</h2>
-                            <h4>4 stock to play</h4>
+                            <h4>1 stock to play</h4>
                             <button style={css.btns} onClick={() => this.playGame(2, 1)}>PLAY!</button>
                             <p style={css.description}>Predict which stock will perform the Worst</p>
                         </div>

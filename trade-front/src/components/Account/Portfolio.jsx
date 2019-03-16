@@ -14,7 +14,6 @@ let Portfolio = ({ funds }) => {
                     <th style={css.tCol}>Quantity</th>
                     <th style={css.tCol}>Cost</th>
                     <th style={css.tCol}>Total</th>
-                    <th style={css.tCol}>Total</th>
                 </tr>
             </thead>
             <StockList />

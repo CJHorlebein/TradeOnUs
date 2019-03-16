@@ -30,9 +30,7 @@ class StockDetails extends Component {
             })
             .catch(err => {
                 this.setState({
-                    alerts:[
-                        ...err.response.data
-                    ],
+                    alerts:[{...err.response.data}],
                     success: false
                 })
             })

@@ -9,7 +9,10 @@ class LoginForm extends Component{
     constructor(props){
         super(props);
         let initialState = {
-            msg: ''
+            alerts: [
+                // {msg: ''}
+            ],
+            success: false
         }
         this.state = initialState;
     }
@@ -23,14 +26,21 @@ class LoginForm extends Component{
             .then(res => {
                 this.props.updateUser(res.data)
                 this.setState({
-                    msg: 'You are now logged in'
+                    alerts: [{msg: 'You are now logged in'}],
+                    success: true
+                })
+            })
+            .catch(err => {
+                this.setState({
+                    alerts: [{msg: 'Something went wrong!'}],
+                    success: false
                 })
             })
     }
     render(){
         return (
             <div style={css.box}>
-                {this.state.msg !== '' ? <FormAlert success={true} msg={this.state.msg}/> : ''}
+                {this.state.alerts.map((alert, i) => <FormAlert success={this.state.success} msg={alert.msg} key={i} />)}
                 <div style={css.header}><em>Please sign in to continue...</em></div>
                 <form onSubmit={(e) => this.loginUser(e)} style={css.formField}>
                     <input style={css.field} type='text' id='email' placeholder='Email'/>
